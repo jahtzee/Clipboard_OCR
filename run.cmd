@@ -1,6 +1,6 @@
 @echo off
 
-set windowed=FALSE
+set windowed=TRUE
 set anaconda_path="P:\Programme\Anaconda3"
 
 call %anaconda_path%\Scripts\activate.bat 
