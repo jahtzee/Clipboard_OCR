@@ -7,13 +7,12 @@ Created on Sat Jul 10 19:19:17 2021
 
 # Import
 import os
-#import PySimpleGUI as sg
+import PySimpleGUI as sg
 import cv2
 import pytesseract
 from PIL import ImageGrab
 import tempfile
 import pyperclip
-from infi.systray import SysTrayIcon
 
 # Definitions
 custom_config = r'--oem 3 -l ger+rus+eng --psm 6'
@@ -37,12 +36,23 @@ def OCRImageFromTemp(path):
     string.strip()
     return string
 
-def systrayOption(systray):
-    path = saveImageFromClipboard()
-    pyperclip.copy(OCRImageFromTemp(path))  
-
 if __name__ == "__main__":
-    menu_options = (("Copy", None, systrayOption),)
-    systray = SysTrayIcon('py.ico', 'Clipboard-OCR', menu_options)
-    systray.start()
+    layout = [[sg.Text('Output')], 
+              [sg.InputText(key='-IN-')],
+              [sg.Button("Read"), sg.Button("Copy"), sg.Button("Close")]]
+    window = sg.Window('Clipboard OCR', layout)
+    while True:
+        event, values = window.read()
+        if event == sg.WIN_CLOSED or event == 'Exit':
+            break
+        if event == "Read":
+            path = saveImageFromClipboard()
+            result = OCRImageFromTemp(path)
+            window['-IN-'].update(result)
+        if event == "Copy":
+            pyperclip.copy(values['-IN-'])
+        if event == "Close":
+            window.close()
+    window.close()    
+
     
