@@ -12,7 +12,7 @@ import pyperclip
 import clipboard_ocr as co
 
 # Definitions
-custom_config = r'--oem 3 -l ger+rus+eng --psm 6'
+custom_config = r'--oem 3 -l eng+ger --psm 6'
 temp = tempfile.gettempdir()
 
 if __name__ == "__main__":

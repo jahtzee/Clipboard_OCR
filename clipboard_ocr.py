@@ -17,7 +17,7 @@ from infi.systray import SysTrayIcon
 import numpy as np
 
 # Definitions
-custom_config = r'--oem 3 -l ger+rus+eng --psm 6'
+custom_config = r'--oem 3 -l eng+ger --psm 6'
 temp = tempfile.gettempdir()
 
 def saveImageFromClipboard():
