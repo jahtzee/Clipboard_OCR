@@ -33,7 +33,7 @@ def OCRImageFromTemp(path):
         return 'Error - Check clipboard contents!'
     img = cv2.imread(path)
     img = preprocessImage(img)
-    string = str(pytesseract.image_to_string(img))
+    string = str(pytesseract.image_to_string(img), config=custom_config)
     os.remove(temp+'\ocr_tmp.PNG')
     string = string.replace("\f","")
     string.strip()
