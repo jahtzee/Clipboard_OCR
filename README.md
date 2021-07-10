@@ -1,5 +1,5 @@
 # Clipboard_OCR
-Provides optical character recognition for images pulled from the clipboard. Build and tested for Windows 10 with Anaconda 3.
+Provides optical character recognition for images pulled from the clipboard. Built and tested for Windows 10 with Anaconda 3.
 
 Usage:
 
