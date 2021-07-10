@@ -6,6 +6,7 @@ Created on Sat Jul 10 19:19:17 2021
 """
 
 # Import
+import sys
 import os
 #import PySimpleGUI as sg
 import cv2
@@ -17,7 +18,9 @@ from infi.systray import SysTrayIcon
 import numpy as np
 
 # Definitions
-custom_config = r'--oem 3 -l eng+ger --psm 6'
+
+languages = 'eng+ger'
+custom_config = r'--oem 3 -l '+languages+' --psm 6'
 temp = tempfile.gettempdir()
 
 def saveImageFromClipboard():
@@ -33,7 +36,7 @@ def OCRImageFromTemp(path):
         return 'Error - Check clipboard contents!'
     img = cv2.imread(path)
     img = preprocessImage(img)
-    string = str(pytesseract.image_to_string(img), config=custom_config)
+    string = str(pytesseract.image_to_string(img, config=custom_config))
     os.remove(temp+'\ocr_tmp.PNG')
     string = string.replace("\f","")
     string.strip()
@@ -97,6 +100,9 @@ def match_template(image, template):
     return cv2.matchTemplate(image, template, cv2.TM_CCOEFF_NORMED) 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        languages = sys.argv[1]
+        custom_config = r'--oem 3 -l '+languages+' --psm 6'
     menu_options = (("Copy", None, systrayOption),)
     systray = SysTrayIcon('py.ico', 'Clipboard-OCR', menu_options)
     systray.start()
