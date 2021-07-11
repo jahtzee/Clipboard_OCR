@@ -7,15 +7,10 @@ Created on Sat Jul 10 19:19:17 2021
 
 # Import
 import PySimpleGUI as sg
-import tempfile
 import pyperclip
 import clipboard_ocr as co
 
-# Definitions
-custom_config = r'--oem 3 -l eng+ger --psm 6'
-temp = tempfile.gettempdir()
-
-if __name__ == "__main__":
+if __name__ == "__main__": 
     layout = [[sg.Text('Output')], 
               [sg.InputText(key='-IN-')],
               [sg.Button("Read"), sg.Button("Copy"), sg.Button("Close")]]

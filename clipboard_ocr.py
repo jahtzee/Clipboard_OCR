@@ -18,10 +18,12 @@ from infi.systray import SysTrayIcon
 import numpy as np
 
 # Definitions
-
 languages = 'eng+ger'
 custom_config = r'--oem 3 -l '+languages+' --psm 6'
 temp = tempfile.gettempdir()
+if len(sys.argv) > 1:
+    languages = sys.argv[1]
+    custom_config = r'--oem 3 -l '+languages+' --psm 6'
 
 def saveImageFromClipboard():
     clip = ImageGrab.grabclipboard()
@@ -100,9 +102,6 @@ def match_template(image, template):
     return cv2.matchTemplate(image, template, cv2.TM_CCOEFF_NORMED) 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        languages = sys.argv[1]
-        custom_config = r'--oem 3 -l '+languages+' --psm 6'
     menu_options = (("Copy", None, systrayOption),)
     systray = SysTrayIcon('py.ico', 'Clipboard-OCR', menu_options)
     systray.start()
