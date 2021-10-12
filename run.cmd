@@ -1,7 +1,7 @@
 @echo off
 
 set windowed=TRUE
-set languages=eng+ger
+set languages=eng
 set anaconda_path="P:\Programme\Anaconda3"
 
 call %anaconda_path%\Scripts\activate.bat 
